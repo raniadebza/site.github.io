@@ -90,19 +90,56 @@ nav a:hover {
 
 /* 6. Adaptation Mobile */
 @media (max-width: 768px) {
+    /* Global & Header */
     header {
         flex-direction: column;
         align-items: center;
-        gap: 30px;
-        margin-bottom: 60px;
+        gap: 20px;
+        margin-bottom: 40px;
     }
 
     body {
-        padding: 40px 15px;
+        padding: 20px 15px;
     }
 
-    .gallery {
-        gap: 80px;
+    /* PAGE ACCUEIL : Image plus grande sur mobile */
+    .home-main img {
+        width: 90% !important; /* L'image de l'accueil prend presque tout l'écran */
+        max-width: 400px;
+    }
+
+    /* PAGE WORKS : On évite que les images soient immenses */
+    .artwork img {
+        height: 350px !important; /* On réduit la hauteur pour que l'image tienne dans l'écran */
+        width: auto;
+    }
+
+    .carousel-container {
+        padding: 0 10vw; /* On réduit le padding énorme qui servait au centrage desktop */
+        gap: 30px;
+    }
+
+    /* PAGE ABOUT : Le texte épouse l'image */
+    .about-container {
+        flex-direction: column; /* Image en haut, texte en bas */
+        align-items: center;
+        padding-top: 20px;
+    }
+
+    .about-image img {
+        width: 100% !important; /* L'image de profil prend la largeur */
+        margin-bottom: 20px;
+    }
+
+    .about-text {
+        width: 100% !important;
+        padding: 0 10px;
+        text-align: left; /* Plus facile à lire sur petit écran */
+    }
+
+    .about-text p {
+        font-size: 1rem;
+        line-height: 1.6;
     }
 }
 
