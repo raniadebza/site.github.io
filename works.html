@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Works | Rania Debza</title>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="index.html">Rania Debza</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="works.html" class="active">Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <nav class="years-nav">
+            <button class="year-btn active" onclick="showYear('2026', event)">2026</button>
+            <button class="year-btn" onclick="showYear('2025', event)">2025</button>
+        </nav>
+
+        <div id="year-2026" class="year-section active">
+            <div class="carousel-container">
+                <div class="artwork">
+                    <img src="images/2amencounters.png" alt="2am encounters">
+                    <div class="caption">
+                        <p class="title">2am encounters</p>
+                        <p class="details">Acrylic on canvas, 2026</p>
+                    </div>
+                </div>
+                <div class="artwork">
+                    <img src="images/Sistersourtimehascomebutourlovewilloutliveus.jpg" alt="Sisters">
+                    <div class="caption">
+                        <p class="title">Sisters, our time has come, but our love will outlive us</p>
+                        <p class="details">Acrylic on canvas, 2026</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="year-2025" class="year-section">
+            <div class="carousel-container">
+                
+                <div class="artwork">
+                    <img src="images/Thedevilisonehellofahotman.png" alt="The devil">
+                    <div class="caption">
+                        <p class="title">The devil is one hell of a hot man</p>
+                        <p class="details">Acrylic on canvas, 2025</p>
+                    </div>
+                </div>
+
+                <div class="artwork">
+                    <img src="images/SpiltMilk.png" alt="Spilt Milk">
+                    <div class="caption">
+                        <p class="title">No Spilt Milk</p>
+                        <p class="details">Acrylic on canvas, 2025</p>
+                    </div>
+                </div>
+
+                <div class="artwork">
+                    <img src="images/Alldolledupforthenextone.png" alt="All dolled up">
+                    <div class="caption">
+                        <p class="title">All dolled up for the next one</p>
+                        <p class="details">Acrylic on canvas, 2025</p>
+                    </div>
+                </div>
+
+                <div class="artwork">
+                    <img src="images/Bisous.png" alt="Bisous">
+                    <div class="caption">
+                        <p class="title">Bisous</p>
+                        <p class="details">Acrylic on canvas, 2025</p>
+                    </div>
+                </div>
+
+                <div class="artwork">
+                    <img src="images/Danceofthehappyfolks.png" alt="Dance">
+                    <div class="caption">
+                        <p class="title">Dance of the happy folks</p>
+                        <p class="details">Acrylic on canvas, 2025</p>
+                    </div>
+                </div>
+
+                <div class="artwork">
+                    <img src="images/Thecheetah.png" alt="The Cheetah">
+                    <div class="caption">
+                        <p class="title">The Cheetah</p>
+                        <p class="details">Acrylic on canvas, 2025</p>
+                    </div>
+                </div>
+
+                <div class="artwork">
+                    <img src="images/Theworldontheothersideofthecurtain.png" alt="The world">
+                    <div class="caption">
+                        <p class="title">The world on the other side of the curtain</p>
+                        <p class="details">Acrylic on canvas, 2025</p>
+                    </div>
+                </div>
+
+                <div class="artwork">
+                    <img src="images/Untitled.png" alt="Untitled">
+                    <div class="caption">
+                        <p class="title">Untitled</p>
+                        <p class="details">Acrylic on canvas, 2025</p>
+                    </div>
+                </div>
+
+                <div class="artwork">
+                    <img src="images/Thepartywentwrongfortheboysitwentamazinglyforthevampires.png" alt="The party">
+                    <div class="caption">
+                        <p class="title">The party went wrong for the boys...</p>
+                        <p class="details">Acrylic on canvas, 2025</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+    function showYear(year, event) {
+        // Masquer toutes les sections
+        const sections = document.querySelectorAll('.year-section');
+        sections.forEach(sec => sec.classList.remove('active'));
+
+        // Désactiver tous les boutons
+        const buttons = document.querySelectorAll('.year-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+
+        // Afficher la section sélectionnée
+        document.getElementById('year-' + year).classList.add('active');
+
+        // Activer le bouton cliqué
+        event.currentTarget.classList.add('active');
+    }
+    </script>
+<footer>
+        <p>&copy; 2026 Rania Debza. All rights reserved.</p>
+    </footer>
+</body>
+</html>
