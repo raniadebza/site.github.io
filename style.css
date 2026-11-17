@@ -31,16 +31,25 @@
     --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
     --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 
-    /* Hauteur des toiles : 480px sur un écran de 900px de haut, puis suit l'écran */
-    --art-h: clamp(300px, calc(100vh - 420px), 640px);
-    --home-h: clamp(340px, calc(100vh - 340px), 720px);
     --gap: 64px;
+    --vh: 100vh;
+
+    /* Marge au-dessus du contenu : 120px, réduite jusqu'à la hauteur du logo
+       (52px) sur les écrans bas pour laisser la place aux toiles. */
+    --main-top: clamp(52px, calc(var(--vh) - 730px), 120px);
+
+    /* Hauteur des toiles : la plus grande possible en gardant à l'écran
+       la légende, le compteur et le copyright (169px au total), et en laissant
+       dépasser la toile suivante à droite (limite liée à la largeur). */
+    --art-h: clamp(320px, min(calc(var(--vh) - var(--main-top) - 169px), calc((100vw - 560px) * 0.68)), 760px);
+
+    /* Accueil : même principe, sans compteur (145px sous l'image). */
+    --home-h: clamp(340px, calc(var(--vh) - var(--main-top) - 145px), 800px);
 }
 
 @supports (height: 100dvh) {
     :root {
-        --art-h: clamp(300px, calc(100dvh - 420px), 640px);
-        --home-h: clamp(340px, calc(100dvh - 340px), 720px);
+        --vh: 100dvh;
     }
 }
 
@@ -166,7 +175,7 @@ a {
     grid-column: 2;
     grid-row: 1;
     min-width: 0;
-    padding: 120px 56px 0 20px;
+    padding: var(--main-top) 56px 0 20px;
 }
 
 .copyright {
@@ -411,7 +420,21 @@ html:not(.js) .counter {
     min-height: 0;
 }
 
+/* Colonnes fixées : la toile reste au centre même quand les flèches
+   sont masquées (année avec une seule œuvre). */
+.lightbox-stage .arrow-prev {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.lightbox-stage .arrow-next {
+    grid-column: 3;
+    grid-row: 1;
+}
+
 .lightbox-frame {
+    grid-column: 2;
+    grid-row: 1;
     position: relative;
     align-self: stretch;
     min-width: 0;
@@ -478,6 +501,20 @@ html:not(.js) .counter {
 .lightbox.is-instant,
 .lightbox.is-instant .lightbox-image {
     transition: none;
+}
+
+/* Écrans bas : marges resserrées pour que la vue agrandie reste
+   plus grande que la toile du carrousel. */
+@media (min-width: 900px) and (max-height: 859px) {
+    .lightbox {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .lightbox-image {
+        top: 4px;
+        height: calc(100% - 8px);
+    }
 }
 
 /* 10. About --------------------------------------------------------------- */
