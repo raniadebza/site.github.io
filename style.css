@@ -1,292 +1,769 @@
-/* 1. Reset et base */
-* {
-    margin: 0;
-    padding: 0;
+/* ==========================================================================
+   Rania Debza — feuille de style
+   Mise en page : logo et menu à gauche, contenu à droite, fond blanc.
+   Les seules couleurs du site sont celles des œuvres.
+   ========================================================================== */
+
+/* 1. Police du logo ------------------------------------------------------- */
+
+@font-face {
+    font-family: "Trovical Web";
+    src: url("fonts/trovical-regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: block;
+}
+
+/* 2. Réglages ------------------------------------------------------------- */
+
+:root {
+    --ink: #1a1a1a;        /* texte, liens */
+    --ink-logo: #111111;   /* logo */
+    --ink-soft: #2b2b2b;   /* titres des œuvres */
+    --muted: #6b6b6b;      /* survol, copyright */
+    --faint: #8f8f8f;      /* détails, compteur */
+    --active: #a3a3a3;     /* page active dans le menu */
+
+    --arrow: rgb(143 143 143 / 0.55);
+    --arrow-hover: rgb(107 107 107 / 0.7);
+    --arrow-end: rgb(143 143 143 / 0.2);
+
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+
+    /* Hauteur des toiles : 480px sur un écran de 900px de haut, puis suit l'écran */
+    --art-h: clamp(300px, calc(100vh - 420px), 640px);
+    --home-h: clamp(340px, calc(100vh - 340px), 720px);
+    --gap: 64px;
+}
+
+@supports (height: 100dvh) {
+    :root {
+        --art-h: clamp(300px, calc(100dvh - 420px), 640px);
+        --home-h: clamp(340px, calc(100dvh - 340px), 720px);
+    }
+}
+
+/* 3. Base ----------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
 body {
-    background-color: #ffffff;
-    font-family: 'EB Garamond', serif; /* Police classique et élégante */
-    color: #1a1a1a;
-    line-height: 1.6;
-    padding: 30px 20px; /* Marges pour éviter que le contenu touche les bords sur mobile */
+    margin: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    grid-template-rows: 1fr auto;
+    background: #ffffff;
+    color: var(--ink);
+    font-family: "EB Garamond", Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    line-height: 1.3;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/* 2. Header & Navigation */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    max-width: 1200px; /* Aligne le header sur la largeur du site */
-    margin: 0 auto 30px auto; /* Centre le header et crée un grand espace avec les oeuvres */
+p,
+ul,
+figure {
+    margin: 0;
 }
 
-.logo a {
-    font-size: 1.4rem;
-    text-decoration: none;
-    color: black;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-nav ul {
-    display: flex;
+ul {
+    padding: 0;
     list-style: none;
-    gap: 30px;
 }
 
-nav a {
-    text-decoration: none;
-    color: #888;
-    font-size: 0.9rem;
-    transition: color 0.3s;
-}
-
-nav a:hover {
-    color: #000;
-}
-
-/* 3. La Galerie (Structure centrée) */
-.gallery {
-    display: flex;
-    flex-direction: column; /* Aligne les œuvres verticalement */
-    align-items: center;    /* Centre chaque bloc horizontalement */
-    gap: 120px;             /* Grand espace "respirable" entre les œuvres */
-    width: 100%;
-    margin-bottom: 100px;
-}
-
-/* 4. Chaque bloc d'œuvre */
-.artwork {
-    width: 100%;
-    max-width: 850px;       /* Largeur maximale de tes photos */
-    text-align: center;     /* Centre la légende sous l'image */
-}
-
-.artwork img {
-    width: 100%;            /* L'image s'adapte à la largeur du bloc */
-    height: auto;
+img {
     display: block;
-    margin: 0 auto 20px auto; /* Centre l'image et l'espace de la légende */
-    /* Optionnel : petite ombre très légère ou bordure */
-    /* box-shadow: 0 4px 15px rgba(0,0,0,0.05); */
+    max-width: 100%;
 }
 
-/* 5. Légendes (Captions) */
-.caption {
-    font-size: 0.9rem;
+a {
+    color: inherit;
+    text-decoration: none;
 }
 
-.title {
+button {
+    font: inherit;
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 4px;
+}
+
+/* 4. Barre latérale : logo + menu ------------------------------------------ */
+
+.sidebar {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    align-self: start;
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 52px;
+    padding: 52px 0 52px 56px;
+}
+
+.logo {
+    display: block;
+    font-family: "Trovical Web", "EB Garamond", Georgia, serif;
+    font-size: 60px;
+    line-height: 53px;
+    font-weight: 400;
+    color: var(--ink-logo);
+    /* Calage sur la maquette : haut du « R » à 52px du bord,
+       bas de « Debza » à 52px du menu. */
+    margin: 2px 0 -10px;
+}
+
+.logo span {
+    display: block;
+}
+
+.nav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+}
+
+.nav a {
+    display: block;
+    font-size: 20px;
+    line-height: 26px;
+    color: var(--ink);
+    transition: color 150ms ease;
+}
+
+.nav a[aria-current="page"] {
+    color: var(--active);
+}
+
+/* 5. Zone principale et copyright ------------------------------------------ */
+
+.main {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+    padding: 120px 56px 0 20px;
+}
+
+.copyright {
+    grid-column: 2;
+    grid-row: 2;
+    padding: 32px 56px 36px 20px;
+    font-size: 14px;
     font-style: italic;
-    margin-bottom: 4px;
+    color: var(--muted);
 }
 
-.details {
-    color: #888;
-    font-size: 0.85rem;
+/* 6. Légendes ------------------------------------------------------------- */
+
+.caption {
+    margin-top: 14px;
+    /* La légende ne doit jamais élargir la toile : elle revient à la ligne */
+    width: 0;
+    min-width: 100%;
+    font-style: italic;
 }
 
-/* 6. Adaptation Mobile */
-@media (max-width: 768px) {
-    /* Global & Header */
-    header {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-        margin-bottom: 40px;
-    }
-
-    body {
-        padding: 20px 15px;
-    }
-
-    /* PAGE ACCUEIL : Image plus grande sur mobile */
-    .home-main img {
-        width: 90% !important; /* L'image de l'accueil prend presque tout l'écran */
-        max-width: 400px;
-    }
-
-    /* PAGE WORKS : On évite que les images soient immenses */
-    .artwork img {
-        height: 350px !important; /* On réduit la hauteur pour que l'image tienne dans l'écran */
-        width: auto;
-    }
-
-    .carousel-container {
-        padding: 0 10vw; /* On réduit le padding énorme qui servait au centrage desktop */
-        gap: 30px;
-    }
-
-    /* PAGE ABOUT : Le texte épouse l'image */
-    .about-container {
-        flex-direction: column; /* Image en haut, texte en bas */
-        align-items: center;
-        padding-top: 20px;
-    }
-
-    .about-image img {
-        width: 100% !important; /* L'image de profil prend la largeur */
-        margin-bottom: 20px;
-    }
-
-    .about-text {
-        width: 100% !important;
-        padding: 0 10px;
-        text-align: left; /* Plus facile à lire sur petit écran */
-    }
-
-    .about-text p {
-        font-size: 1rem;
-        line-height: 1.6;
-    }
+.caption .title {
+    font-size: 18px;
+    color: var(--ink-soft);
 }
 
-.about-image img {
-   /* width: 350px;  /* Change cette valeur en pixels pour agrandir ou rétrécir */
-    /* OU */
-    width: 80%;    /* L'image prendra 30% de la largeur de la page */
-    
-    height: auto;  /* Garde les proportions */
+.caption .details {
+    margin-top: 2px;
+    font-size: 15px;
+    color: var(--faint);
+}
+
+.counter {
+    font-size: 15px;
+    letter-spacing: 2px;
+    color: var(--faint);
+}
+
+/* 7. Accueil -------------------------------------------------------------- */
+
+.home-figure {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: fit-content;
+    max-width: 100%;
+}
+
+.home-image {
+    width: auto;
+    height: auto;
+    max-height: var(--home-h);
+}
+
+/* 8. Works : carrousel ---------------------------------------------------- */
+
+.js .year {
+    display: none;
+}
+
+.js .year.is-active {
     display: block;
 }
 
-/* Style spécifique pour la page About */
-.about-container {
+html:not(.js) .year + .year {
+    margin-top: 72px;
+}
+
+html:not(.js) .arrow,
+html:not(.js) .counter {
+    display: none;
+}
+
+.carousel {
+    position: relative;
+}
+
+.track {
+    position: relative;
     display: flex;
-    justify-content: center;
-    padding-top: 50px;
-}
-
-.about-text {
-    max-width: 650px; /* On réduit la largeur pour que ce soit plus lisible */
-    line-height: 1.8;
-    text-align: justify; /* Optionnel : pour un look livre/édition */
-}
-
-.about-text p {
-    margin-bottom: 25px; /* Espace entre les paragraphes */
-    font-size: 1.1rem;
-}
-
-/* Petit détail pour montrer quelle page est active */
-nav a.active {
-    color: #000;
-    border-bottom: 1px solid #000;
-}
-
-/* Style spécifique pour la page Contact */
-.contact-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50vh; /* Centre le contenu verticalement dans la page */
-    text-align: center;
-}
-
-.contact-content p {
-    margin-bottom: 20px;
-    color: #888;
-    font-size: 1rem;
-}
-
-.contact-link {
-    display: block; /* Met les liens l'un sous l'autre */
-    text-decoration: none;
-    color: #000;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    transition: opacity 0.3s;
-}
-
-.contact-link:hover {
-    opacity: 0.5; /* Petit effet de fondu au survol très chic */
-}
-
-/* Navigation des années */
-.years-nav {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 40px;
-}
-
-.year-btn {
-    background: none;
-    border: none;
-    font-family: 'EB Garamond', serif;
-    font-size: 1.1rem;
-    cursor: pointer;
-    color: #aaa;
-    transition: 0.3s;
-}
-
-.year-btn.active {
-    color: #000;
-    text-decoration: underline;
-}
-
-/* Gestion des sections */
-.year-section {
-    display: none; /* Cache les années par défaut */
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-}
-
-.year-section.active {
-    display: block;
-    opacity: 1;
-}
-
-.carousel-container {
-    display: flex;
+    gap: var(--gap);
     overflow-x: auto;
-    scroll-snap-type: x mandatory; /* Force l'aimantation au centre */
-    gap: 50px;
-    
-    /* On ajoute du padding sur les côtés pour permettre le centrage */
-    padding: 0px 50vw; 
-    
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
 
-.carousel-container::-webkit-scrollbar {
+.track::-webkit-scrollbar {
     display: none;
 }
 
+/* Espace de fin calculé par script.js : la dernière toile peut ainsi
+   s'aligner sur le bord gauche comme les autres. */
+.track::after {
+    content: "";
+    flex: 0 0 var(--tail, 0px);
+}
+
 .artwork {
-    flex: 0 0 auto;
-    scroll-snap-align: center;
-    width: auto; /* La largeur s'adaptera selon le format de l'image */
+    flex: none;
+    scroll-snap-align: start;
 }
 
-.artwork img {
-    height: 500px; /* <--- MODIFIE ICI (ex: 400px, 500px, 600px) */
-    width: auto;   /* Garde le ratio de tes peintures sans les déformer */
-    object-fit: contain;
-    display: block;
-    margin-bottom: 20px;
-}
-
-/* Style pour l'image unique de la page d'accueil */
-.home-main {
+.artwork figure {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 60vh; /* Centre l'image verticalement dans l'espace restant */
+    flex-direction: column;
 }
 
-.home-main img {
-    width: 60%;       /* <--- MODIFIE CE % pour la largeur sur l'accueil */
-    height: auto;     /* Laisse la hauteur se régler seule pour ne pas déformer */
+.artwork-open {
     display: block;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: zoom-in;
 }
 
-footer {
-    text-align: center; /* Centre le texte */
-    font-size: 12px;    /* Taille plus petite */
-    margin-top: 40px;   /* Ajoute un peu d'espace avec le texte du dessus */
-    opacity: 0.7;       /* Optionnel : rend le texte un peu plus discret */
+.artwork-open img {
+    height: var(--art-h);
+    width: auto;
+    max-width: none;
+}
+
+.artwork-open:focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: -3px;
+}
+
+.artwork-open:focus-visible img {
+    outline: 2px solid #ffffff;
+    outline-offset: -5px;
+}
+
+.carousel + .counter {
+    margin-top: 4px;
+    text-align: right;
+}
+
+/* Flèches (carrousel et vue agrandie) */
+
+.arrow {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 76px;
+    padding: 0;
+    border: 0;
+    background: var(--arrow);
+    color: #ffffff;
+    cursor: pointer;
+    transition: transform 160ms var(--ease-out), background-color 150ms ease;
+}
+
+.arrow svg {
+    width: 34px;
+    height: 34px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.arrow:active {
+    background: var(--arrow-hover);
+    transform: scale(0.97);
+}
+
+.arrow[aria-disabled="true"] {
+    background: var(--arrow-end);
+    cursor: default;
+    transform: none;
+}
+
+.arrow:focus-visible {
+    outline-offset: 2px;
+}
+
+.carousel .arrow {
+    position: absolute;
+    z-index: 1; /* au-dessus des toiles */
+    top: calc(var(--art-h) / 2 - 38px);
+}
+
+.carousel .arrow-prev {
+    left: 0;
+}
+
+.carousel .arrow-next {
+    right: 0;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* 9. Vue agrandie --------------------------------------------------------- */
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0;
+    padding: 36px 56px;
+    border: 0;
+    background: #ffffff;
+    color: var(--ink);
+    opacity: 0;
+    overflow: hidden;
+}
+
+.lightbox[open] {
+    display: grid;
+    grid-template-rows: 44px minmax(0, 1fr) auto;
+}
+
+.lightbox::backdrop {
+    background: transparent;
+}
+
+.lightbox-close {
+    justify-self: end;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    background: none;
+    font-size: 20px;
+    line-height: 26px;
+    color: var(--ink);
+    cursor: pointer;
+    transition: color 150ms ease;
+}
+
+.lightbox-stage {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr) 56px;
+    align-items: center;
+    min-height: 0;
+}
+
+.lightbox-frame {
+    position: relative;
+    align-self: stretch;
+    min-width: 0;
+    min-height: 0;
+}
+
+.lightbox-image {
+    position: absolute;
+    top: 29px;
+    left: 24px;
+    width: calc(100% - 48px);
+    height: calc(100% - 58px);
+    max-width: none;
+    object-fit: contain;
+    transform: scale(0.96);
+}
+
+.lightbox-caption {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding-top: 18px;
+    text-align: center;
+    font-style: italic;
+}
+
+.lightbox-caption .title {
+    font-size: 19px;
+    color: var(--ink-soft);
+}
+
+.lightbox-caption .details {
+    font-size: 15px;
+    color: var(--faint);
+}
+
+.lightbox-caption .counter {
+    font-style: normal;
+}
+
+/* Ouverture 250ms, fermeture 180ms : la sortie est plus rapide que l'entrée */
+.lightbox.is-open {
+    opacity: 1;
+    transition: opacity 250ms var(--ease-out);
+}
+
+.lightbox.is-open .lightbox-image {
+    transform: none;
+    transition: transform 250ms var(--ease-out);
+}
+
+.lightbox.is-closing {
+    opacity: 0;
+    transition: opacity 180ms var(--ease-out);
+}
+
+.lightbox.is-closing .lightbox-image {
+    transform: scale(0.96);
+    transition: transform 180ms var(--ease-out);
+}
+
+/* Action clavier : aucun mouvement */
+.lightbox.is-instant,
+.lightbox.is-instant .lightbox-image {
+    transition: none;
+}
+
+/* 10. About --------------------------------------------------------------- */
+
+.about {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--gap);
+}
+
+.about-image {
+    flex: none;
+    width: 380px;
+    height: auto;
+}
+
+.about-text {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 620px;
+    line-height: 1.5;
+}
+
+.about-text p + p {
+    margin-top: 20px;
+}
+
+.about-text .representation {
+    font-style: italic;
+    color: var(--muted);
+}
+
+/* 11. Contact ------------------------------------------------------------- */
+
+.contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+}
+
+.contact-intro {
+    font-size: 18px;
+    font-style: italic;
+    color: var(--faint);
+}
+
+.contact-link {
+    font-size: 30px;
+    color: var(--ink);
+    transition: color 150ms ease;
+}
+
+/* 12. Survol : uniquement avec une souris --------------------------------- */
+
+@media (hover: hover) and (pointer: fine) {
+    .nav a:not([aria-current="page"]):hover,
+    .contact-link:hover,
+    .lightbox-close:hover {
+        color: var(--muted);
+    }
+
+    .arrow:not([aria-disabled="true"]):hover {
+        background: var(--arrow-hover);
+    }
+}
+
+/* 13. Animations ---------------------------------------------------------- */
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes rise-in {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+}
+
+/* Premier chargement (une fois par visite) : logo et menu ensemble,
+   puis la première image, puis les suivantes. Le texte ne s'anime pas. */
+.intro .sidebar {
+    animation: fade-in 500ms var(--ease-out) both;
+}
+
+.intro .home-image,
+.intro .about-image,
+.intro .artwork:first-child .artwork-open {
+    animation: fade-in 500ms var(--ease-out) 110ms both;
+}
+
+.intro .artwork:not(:first-child) .artwork-open,
+.intro .carousel .arrow {
+    animation: fade-in 500ms var(--ease-out) 190ms both;
+}
+
+/* Changement d'année : l'ancienne série s'efface (150ms),
+   la nouvelle arrive toile après toile (250ms, décalage 0 / 50 / 90ms). */
+.year.is-leaving {
+    opacity: 0;
+    transition: opacity 150ms var(--ease-out);
+}
+
+.year.is-entering .artwork-open {
+    animation: rise-in 250ms var(--ease-out) both;
+}
+
+.year.is-entering .artwork:nth-child(2) .artwork-open {
+    animation-delay: 50ms;
+}
+
+.year.is-entering .artwork:nth-child(n + 3) .artwork-open {
+    animation-delay: 90ms;
+}
+
+.year.is-entering .arrow {
+    animation: fade-in 250ms var(--ease-out) both;
+}
+
+/* Mouvement réduit : les déplacements deviennent de simples fondus */
+@media (prefers-reduced-motion: reduce) {
+    .intro .sidebar,
+    .intro .home-image,
+    .intro .about-image,
+    .intro .artwork .artwork-open,
+    .intro .carousel .arrow,
+    .year.is-entering .artwork-open,
+    .year.is-entering .arrow {
+        animation-name: fade-in;
+        animation-duration: 200ms;
+        animation-timing-function: ease;
+    }
+
+    .year.is-leaving {
+        transition: opacity 200ms ease;
+    }
+
+    .arrow,
+    .arrow:active {
+        transform: none;
+        transition: background-color 150ms ease;
+    }
+
+    .lightbox .lightbox-image,
+    .lightbox.is-open .lightbox-image,
+    .lightbox.is-closing .lightbox-image {
+        transform: none;
+        transition: none;
+    }
+
+    .lightbox.is-open,
+    .lightbox.is-closing {
+        transition: opacity 200ms ease;
+    }
+
+    .lightbox.is-instant {
+        transition: none;
+    }
+}
+
+/* 14. Petits écrans (moins de 900px) -------------------------------------- */
+
+@media (max-width: 899px) {
+    :root {
+        --art-h: min(58vw, 420px);
+        --gap: 16px;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sidebar {
+        position: static;
+        align-self: stretch;
+        gap: 20px;
+        padding: 28px 20px 0;
+    }
+
+    .logo {
+        font-size: 38px;
+        line-height: 1;
+        margin: 0;
+    }
+
+    .logo span {
+        display: inline;
+    }
+
+    .nav ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0 28px;
+    }
+
+    .nav a {
+        display: flex;
+        align-items: center;
+        min-height: 44px;
+    }
+
+    .main {
+        flex: 1 0 auto;
+        padding: 20px 20px 0;
+    }
+
+    .copyright {
+        padding: 40px 20px 24px;
+        font-size: 13px;
+    }
+
+    .home-image {
+        max-height: none;
+    }
+
+    /* Carrousel au doigt : pas de flèches, la toile suivante dépasse à droite */
+    .track {
+        margin-right: -20px;
+    }
+
+    .carousel .arrow {
+        display: none;
+    }
+
+    .caption {
+        margin-top: 12px;
+    }
+
+    .about {
+        flex-direction: column;
+        gap: 28px;
+    }
+
+    .about-image {
+        width: 100%;
+        max-width: 380px;
+    }
+
+    .about-text {
+        flex: none;
+        max-width: none;
+    }
+
+    .contact-link {
+        font-size: 24px;
+        overflow-wrap: anywhere;
+    }
+
+    .lightbox {
+        padding: 12px 20px 24px;
+    }
+
+    .lightbox-stage {
+        position: relative;
+        display: block;
+    }
+
+    .lightbox-frame {
+        height: 100%;
+    }
+
+    .lightbox-image {
+        top: 12px;
+        left: 0;
+        width: 100%;
+        height: calc(100% - 24px);
+    }
+
+    .lightbox .arrow {
+        position: absolute;
+        top: 50%;
+        z-index: 1;
+        width: 44px;
+        height: 60px;
+        margin-top: -30px;
+    }
+
+    .lightbox .arrow-prev {
+        left: 0;
+    }
+
+    .lightbox .arrow-next {
+        right: 0;
+    }
 }

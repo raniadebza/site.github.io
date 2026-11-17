@@ -1,150 +1,218 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Works | Rania Debza</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link rel="preload" href="fonts/trovical-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
 <body>
 
-    <header>
-        <div class="logo">
-            <a href="index.html">Rania Debza</a>
-        </div>
-        <nav>
+    <header class="sidebar">
+        <a class="logo" href="index.html"><span>Rania</span> <span>Debza</span></a>
+        <nav class="nav" aria-label="Main">
             <ul>
-                <li><a href="works.html" class="active">Works</a></li>
+                <li><a href="works.html#2026" data-year="2026">2026</a></li>
+                <li><a href="works.html#2025" data-year="2025">2025</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <main>
-        <nav class="years-nav">
-            <button class="year-btn active" onclick="showYear('2026', event)">2026</button>
-            <button class="year-btn" onclick="showYear('2025', event)">2025</button>
-        </nav>
+    <main class="main">
 
-        <div id="year-2026" class="year-section active">
-            <div class="carousel-container">
-                <div class="artwork">
-                    <img src="images/2amencounters.jpg" alt="2am encounters">
-                    <div class="caption">
-                        <p class="title">2am encounters</p>
-                        <p class="details">Acrylic on canvas, 2026</p>
-                    </div>
-                </div>
-                <!--<div class="artwork">
-                    <img src="images/Sisters.jpg" alt="Sisters">
-                    <div class="caption">
-                        <p class="title">Sisters, our time has come, but our love will outlive us</p>
-                        <p class="details">Acrylic on canvas, 2026</p>
-                    </div>
-                </div> -->
+        <!--
+            Une <section class="year"> par année, la plus récente en premier.
+            Pour ajouter une œuvre : copier un bloc <li class="artwork"> … </li>
+            et changer l'image (src, alt, width, height en pixels), le titre et les détails.
+            Le compteur et les flèches se règlent tout seuls.
+            Pour ajouter une année : copier une section entière, changer data-year,
+            puis ajouter le lien correspondant dans le menu des quatre pages.
+        -->
+
+        <section class="year" data-year="2026" aria-label="2026">
+            <div class="carousel">
+                <button class="arrow arrow-prev" type="button" aria-label="Previous work" aria-disabled="true">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+                </button>
+                <ul class="track">
+                    <li class="artwork">
+                        <figure>
+                            <button class="artwork-open" type="button">
+                                <img src="images/2amencounters.jpg" alt="2am encounters" width="3691" height="2759">
+                            </button>
+                            <figcaption class="caption">
+                                <p class="title">2am encounters</p>
+                                <p class="details">Acrylic on canvas, 2026</p>
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <!--
+                    <li class="artwork">
+                        <figure>
+                            <button class="artwork-open" type="button">
+                                <img src="images/Sisters.jpg" alt="Sisters, our time has come, but our love will outlive us" width="1788" height="1228" loading="lazy">
+                            </button>
+                            <figcaption class="caption">
+                                <p class="title">Sisters, our time has come, but our love will outlive us</p>
+                                <p class="details">Acrylic on canvas, 2026</p>
+                            </figcaption>
+                        </figure>
+                    </li>
+                    -->
+                </ul>
+                <button class="arrow arrow-next" type="button" aria-label="Next work">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                </button>
             </div>
-        </div>
+            <p class="counter" aria-hidden="true"></p>
+        </section>
 
-        <div id="year-2025" class="year-section">
-            <div class="carousel-container">
-                
-                <div class="artwork">
-                    <img src="images/Thedevilisonehellofahotman.png" alt="The devil">
-                    <div class="caption">
-                        <p class="title">The devil is one hell of a hot man</p>
-                        <p class="details">Acrylic on canvas, 2025</p>
-                    </div>
-                </div>
-
-                <div class="artwork">
-                    <img src="images/SpiltMilk.png" alt="Spilt Milk">
-                    <div class="caption">
-                        <p class="title">No Spilt Milk</p>
-                        <p class="details">Acrylic on canvas, 2025</p>
-                    </div>
-                </div>
-
-                <div class="artwork">
-                    <img src="images/Alldolledupforthenextone.png" alt="All dolled up">
-                    <div class="caption">
-                        <p class="title">All dolled up for the next one</p>
-                        <p class="details">Acrylic on canvas, 2025</p>
-                    </div>
-                </div>
-
-                <div class="artwork">
-                    <img src="images/Bisous.png" alt="Bisous">
-                    <div class="caption">
-                        <p class="title">Bisous</p>
-                        <p class="details">Acrylic on canvas, 2025</p>
-                    </div>
-                </div>
-
-                <div class="artwork">
-                    <img src="images/Danceofthehappyfolks.png" alt="Dance">
-                    <div class="caption">
-                        <p class="title">Dance of the happy folks</p>
-                        <p class="details">Acrylic on canvas, 2025</p>
-                    </div>
-                </div>
-
-                <div class="artwork">
-                    <img src="images/Thecheetah.jpg" alt="The Cheetah">
-                    <div class="caption">
-                        <p class="title">The Cheetah</p>
-                        <p class="details">Acrylic on canvas, 2025</p>
-                    </div>
-                </div>
-
-                <div class="artwork">
-                    <img src="images/Theworldontheothersideofthecurtain.jpg" alt="The world">
-                    <div class="caption">
-                        <p class="title">The world on the other side of the curtain</p>
-                        <p class="details">Acrylic on canvas, 2025</p>
-                    </div>
-                </div>
-
-                <div class="artwork">
-                    <img src="images/Untitled.jpg" alt="Untitled">
-                    <div class="caption">
-                        <p class="title">Untitled</p>
-                        <p class="details">Acrylic on canvas, 2025</p>
-                    </div>
-                </div>
-
-                <div class="artwork">
-                    <img src="images/Thepartywentwrongfortheboysitwentamazinglyforthevampires.png" alt="The party">
-                    <div class="caption">
-                        <p class="title">The party went wrong for the boys...</p>
-                        <p class="details">Acrylic on canvas, 2025</p>
-                    </div>
-                </div>
-
+        <section class="year" data-year="2025" aria-label="2025">
+            <div class="carousel">
+                <button class="arrow arrow-prev" type="button" aria-label="Previous work" aria-disabled="true">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+                </button>
+                <ul class="track">
+                    <li class="artwork">
+                        <figure>
+                            <button class="artwork-open" type="button">
+                                <img src="images/Thedevilisonehellofahotman.png" alt="The devil is one hell of a hot man" width="1788" height="1223">
+                            </button>
+                            <figcaption class="caption">
+                                <p class="title">The devil is one hell of a hot man</p>
+                                <p class="details">Acrylic on canvas, 2025</p>
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <li class="artwork">
+                        <figure>
+                            <button class="artwork-open" type="button">
+                                <img src="images/SpiltMilk.png" alt="No Spilt Milk" width="1788" height="1272">
+                            </button>
+                            <figcaption class="caption">
+                                <p class="title">No Spilt Milk</p>
+                                <p class="details">Acrylic on canvas, 2025</p>
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <li class="artwork">
+                        <figure>
+                            <button class="artwork-open" type="button">
+                                <img src="images/Alldolledupforthenextone.png" alt="All dolled up for the next one" width="1250" height="1253" loading="lazy">
+                            </button>
+                            <figcaption class="caption">
+                                <p class="title">All dolled up for the next one</p>
+                                <p class="details">Acrylic on canvas, 2025</p>
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <li class="artwork">
+                        <figure>
+                            <button class="artwork-open" type="button">
+                                <img src="images/Bisous.png" alt="Bisous" width="1250" height="1240" loading="lazy">
+                            </button>
+                            <figcaption class="caption">
+                                <p class="title">Bisous</p>
+                                <p class="details">Acrylic on canvas, 2025</p>
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <li class="artwork">
+                        <figure>
+                            <button class="artwork-open" type="button">
+                                <img src="images/Danceofthehappyfolks.png" alt="Dance of the happy folks" width="1788" height="1271" loading="lazy">
+                            </button>
+                            <figcaption class="caption">
+                                <p class="title">Dance of the happy folks</p>
+                                <p class="details">Acrylic on canvas, 2025</p>
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <li class="artwork">
+                        <figure>
+                            <button class="artwork-open" type="button">
+                                <img src="images/Thecheetah.jpg" alt="The Cheetah" width="3706" height="2620" loading="lazy">
+                            </button>
+                            <figcaption class="caption">
+                                <p class="title">The Cheetah</p>
+                                <p class="details">Acrylic on canvas, 2025</p>
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <li class="artwork">
+                        <figure>
+                            <button class="artwork-open" type="button">
+                                <img src="images/Theworldontheothersideofthecurtain.jpg" alt="The world on the other side of the curtain" width="3607" height="2559" loading="lazy">
+                            </button>
+                            <figcaption class="caption">
+                                <p class="title">The world on the other side of the curtain</p>
+                                <p class="details">Acrylic on canvas, 2025</p>
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <li class="artwork">
+                        <figure>
+                            <button class="artwork-open" type="button">
+                                <img src="images/Untitled.jpg" alt="Untitled" width="2929" height="2349" loading="lazy">
+                            </button>
+                            <figcaption class="caption">
+                                <p class="title">Untitled</p>
+                                <p class="details">Acrylic on canvas, 2025</p>
+                            </figcaption>
+                        </figure>
+                    </li>
+                    <li class="artwork">
+                        <figure>
+                            <button class="artwork-open" type="button">
+                                <img src="images/Thepartywentwrongfortheboysitwentamazinglyforthevampires.png" alt="The party went wrong for the boys..." width="1788" height="1231" loading="lazy">
+                            </button>
+                            <figcaption class="caption">
+                                <p class="title">The party went wrong for the boys...</p>
+                                <p class="details">Acrylic on canvas, 2025</p>
+                            </figcaption>
+                        </figure>
+                    </li>
+                </ul>
+                <button class="arrow arrow-next" type="button" aria-label="Next work">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                </button>
             </div>
-        </div>
+            <p class="counter" aria-hidden="true"></p>
+        </section>
+
     </main>
 
-    <script>
-    function showYear(year, event) {
-        // Masquer toutes les sections
-        const sections = document.querySelectorAll('.year-section');
-        sections.forEach(sec => sec.classList.remove('active'));
-
-        // Désactiver tous les boutons
-        const buttons = document.querySelectorAll('.year-btn');
-        buttons.forEach(btn => btn.classList.remove('active'));
-
-        // Afficher la section sélectionnée
-        document.getElementById('year-' + year).classList.add('active');
-
-        // Activer le bouton cliqué
-        event.currentTarget.classList.add('active');
-    }
-    </script>
-<footer>
+    <footer class="copyright">
         <p>&copy; 2026 Rania Debza. All rights reserved.</p>
     </footer>
+
+    <!-- Vue agrandie : ouverte au clic sur une toile, fermée avec « Close » ou Échap -->
+    <dialog class="lightbox" aria-label="Enlarged view">
+        <button class="lightbox-close" type="button">Close</button>
+        <div class="lightbox-stage">
+            <button class="arrow arrow-prev" type="button" aria-label="Previous work" aria-disabled="true">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <div class="lightbox-frame">
+                <img class="lightbox-image" src="" alt="">
+            </div>
+            <button class="arrow arrow-next" type="button" aria-label="Next work">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+        </div>
+        <div class="lightbox-caption">
+            <p class="title"></p>
+            <p class="details"></p>
+            <p class="counter" aria-hidden="true"></p>
+        </div>
+    </dialog>
+
 </body>
 </html>

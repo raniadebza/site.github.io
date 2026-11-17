@@ -1,38 +1,43 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-    <style>
-img {
-  width: 10%;
-}
-</style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rania Debza</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link rel="preload" href="fonts/trovical-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
 <body>
 
-    <header>
-        <div class="logo">
-            <a href="index.html">Rania Debza</a>
-        </div>
-        <nav>
+    <header class="sidebar">
+        <a class="logo" href="index.html"><span>Rania</span> <span>Debza</span></a>
+        <nav class="nav" aria-label="Main">
             <ul>
-                <li><a href="works.html">Works</a></li>
+                <li><a href="works.html#2026" data-year="2026">2026</a></li>
+                <li><a href="works.html#2025" data-year="2025">2025</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="home-main">
-        <img src="images/Thepartywentwrongfortheboysitwentamazinglyforthevampires.png" alt="Home">
+    <main class="main">
+        <figure class="home-figure">
+            <img class="home-image" src="images/Thepartywentwrongfortheboysitwentamazinglyforthevampires.png" alt="The party went wrong for the boys..." width="1788" height="1231">
+            <figcaption class="caption">
+                <p class="title">The party went wrong for the boys...</p>
+                <p class="details">Acrylic on canvas, 2025</p>
+            </figcaption>
+        </figure>
     </main>
 
-<footer>
+    <footer class="copyright">
         <p>&copy; 2026 Rania Debza. All rights reserved.</p>
     </footer>
+
 </body>
 </html>
